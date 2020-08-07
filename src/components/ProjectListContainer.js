@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectList from './ProjectList';
+import Loader from './Loader';
 import apiService from '../services/api';
 
 class ProjectListContainer extends Component {
@@ -26,7 +27,7 @@ class ProjectListContainer extends Component {
   render() {
     const { projects, error, ready } = this.state;
     if (!ready) {
-      return <div>Loading</div>;
+      return <Loader />;
     }
     if (error) {
       return (
