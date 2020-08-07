@@ -7,6 +7,8 @@ class ProjectListContainer extends Component {
     super(props);
     this.state = {
       projects: [],
+      error: null,
+      ready: false,
     };
   }
 
@@ -16,11 +18,25 @@ class ProjectListContainer extends Component {
 
   getAllProjects() {
     apiService.getAllProjects()
-      .then((projects) => this.setState({ projects }));
+      .then((projects) => this.setState({ projects }))
+      .catch((error) => this.setState({ error }))
+      .finally(() => this.setState({ ready: true }));
   }
 
   render() {
-    const { projects } = this.state;
+    const { projects, error, ready } = this.state;
+    if (!ready) {
+      return <div>Loading</div>;
+    }
+    if (error) {
+      return (
+        <div className="container">
+          <div className="alert alert-danger text-center" role="alert">
+            An error occurred! Please come back later!
+          </div>
+        </div>
+      );
+    }
     return (
       <ProjectList projects={projects} />
     );
