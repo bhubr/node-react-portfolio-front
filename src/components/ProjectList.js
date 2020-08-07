@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import ProjectCard from './ProjectCard';
-import projectsList from '../data/projects.json';
 
 class ProjectList extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projects: projectsList,
+      projects: [],
     };
   }
 
