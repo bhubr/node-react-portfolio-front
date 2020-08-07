@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectCard from './ProjectCard';
+import projects from '../data/projects.json';
 
 function ProjectList() {
   return (
@@ -8,16 +9,7 @@ function ProjectList() {
 
         <div className="row">
           <div className="col-md-4">
-            <ProjectCard />
-          </div>
-          <div className="col-md-4">
-            <ProjectCard />
-          </div>
-          <div className="col-md-4">
-            <ProjectCard />
-          </div>
-          <div className="col-md-4">
-            <ProjectCard />
+            <ProjectCard project={projects[0]} />
           </div>
         </div>
       </div>
