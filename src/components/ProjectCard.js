@@ -1,14 +1,19 @@
 import React from 'react';
 
-function ProjectCard() {
+function ProjectCard({ project }) {
+  const {
+    name,
+    description,
+    github_url: githubUrl,
+    picture_url: pictureUrl,
+  } = project;
   return (
     <div className="card mb-4 shadow-sm">
-      <img className="card-img-top" src="https://via.placeholder.com/320x200" alt="project name" />
+      <img className="card-img-top" src={pictureUrl} alt={name} />
       <div className="card-body">
-        <h5 className="card-title">This project</h5>
+        <h5 className="card-title">{name}</h5>
         <p className="card-text">
-          This is a wider card with supporting text below as a natural lead-in to additional
-          content. This content is a little bit longer.
+          {description}
         </p>
         <div className="d-flex justify-content-between align-items-center">
           <div className="btn-group">
@@ -17,7 +22,7 @@ function ProjectCard() {
           </div>
 
           <a
-            href="https://github.com/bhubr/bootstrap-portfolio/"
+            href={githubUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="repo-link"
