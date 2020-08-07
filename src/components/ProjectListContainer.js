@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import ProjectList from './ProjectList';
+import apiService from '../services/api';
 
 class ProjectListContainer extends Component {
   constructor(props) {
@@ -15,12 +15,8 @@ class ProjectListContainer extends Component {
   }
 
   getAllProjects() {
-    axios.get('/api/projects')
-      .then((res) => {
-        this.setState({
-          projects: res.data,
-        });
-      });
+    apiService.getAllProjects()
+      .then((projects) => this.setState({ projects }));
   }
 
   render() {
