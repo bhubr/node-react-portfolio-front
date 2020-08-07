@@ -1,9 +1,26 @@
 [
   {
+    "id": 1,
     "name": "React/Bootstrap Portfolio",
     "description": "A full-stack portfolio app",
     "github_url": "https://github.com",
     "picture_url": "/images/portfolio.png",
+    "techno": "Node.js, React, Bootstrap"
+  },
+  {
+    "id": 2,
+    "name": "Dummy project #1",
+    "description": "A non-existent app",
+    "github_url": "https://github.com",
+    "picture_url": "https://via.placeholder.com/320x200",
+    "techno": "Node.js, React, Bootstrap"
+  },
+  {
+    "id": 3,
+    "name": "Dummy project #2",
+    "description": "Another non-existent app",
+    "github_url": "https://github.com",
+    "picture_url": "https://via.placeholder.com/320x200",
     "techno": "Node.js, React, Bootstrap"
   }
 ]
