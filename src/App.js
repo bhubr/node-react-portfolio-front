@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
-import ProjectList from './components/ProjectList';
+import ProjectListContainer from './components/ProjectListContainer';
 
 export default function App() {
   return (
@@ -9,7 +9,7 @@ export default function App() {
       <Header />
       <main role="main">
         <Hero />
-        <ProjectList />
+        <ProjectListContainer />
       </main>
     </div>
   );

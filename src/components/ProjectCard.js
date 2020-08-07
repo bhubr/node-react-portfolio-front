@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import projectPropTypes from '../prop-types/project';
 
 function ProjectCard({ project }) {
   const {
@@ -37,12 +37,7 @@ function ProjectCard({ project }) {
 }
 
 ProjectCard.propTypes = {
-  project: PropTypes.shape({
-    name: PropTypes.string,
-    description: PropTypes.string,
-    github_url: PropTypes.string,
-    picture_url: PropTypes.string,
-  }),
+  project: projectPropTypes,
 };
 
 ProjectCard.defaultProps = {

@@ -1,46 +1,30 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
+import PropTypes from 'prop-types';
 import ProjectCard from './ProjectCard';
+import projectPropTypes from '../prop-types/project';
 
-class ProjectList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      projects: [],
-    };
-  }
-
-  componentDidMount() {
-    this.getAllProjects();
-  }
-
-  getAllProjects() {
-    axios.get('/api/projects')
-      .then((res) => {
-        this.setState({
-          projects: res.data,
-        });
-      });
-  }
-
-  render() {
-    const { projects } = this.state;
-    return (
-      <div className="album py-5 bg-light">
-        <div className="container">
-          <div className="row">
-            {
-              projects.map((project) => (
-                <div className="col-md-4" key={project.id}>
-                  <ProjectCard project={project} />
-                </div>
-              ))
-            }
-          </div>
+function ProjectList({ projects }) {
+  return (
+    <div className="album py-5 bg-light">
+      <div className="container">
+        <div className="row">
+          {
+            projects.map((project) => (
+              <div className="col-md-4" key={project.id}>
+                <ProjectCard project={project} />
+              </div>
+            ))
+          }
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }
+
+ProjectList.propTypes = {
+  projects: PropTypes.arrayOf(
+    projectPropTypes,
+  ).isRequired,
+};
 
 export default ProjectList;
