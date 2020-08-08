@@ -1,6 +1,7 @@
 import React from 'react';
 import Modal from 'react-modal';
 import PropTypes from 'prop-types';
+import EditProjectForm from './EditProjectForm';
 import projectPropTypes from '../prop-types/project';
 import './Modal.css';
 
@@ -30,6 +31,7 @@ function ProjectEditModal({
         </button>
       </div>
       <div className="row mt-5">
+        <EditProjectForm project={project} />
       </div>
     </Modal>
   );
