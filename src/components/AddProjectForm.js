@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { Component } from 'react';
 import axios from 'axios';
+import Toast from 'light-toast';
 
 const initialState = {
   name: '',
@@ -25,10 +26,12 @@ class AddProjectForm extends Component {
   handleSubmit(event) {
     event.preventDefault();
     axios.post('/api/projects', this.state)
-      .then((res) => {
+      .then(() => {
+        Toast.success('Project created!', 1000);
         this.setState(initialState);
       })
       .catch((error) => {
+        Toast.fail('Failed to create project!', 1000);
         console.error(error);
       });
   }
@@ -42,19 +45,19 @@ class AddProjectForm extends Component {
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
             <label htmlFor="name">Project name</label>
-            <input type="text" className="form-control" id="name" name="name" value={name} onChange={this.handleChange} />
+            <input type="text" className="form-control" id="name" name="name" value={name} onChange={this.handleChange} required />
           </div>
           <div className="form-group">
             <label htmlFor="description">Description</label>
-            <textarea className="form-control" id="description" name="description" value={description} onChange={this.handleChange} />
+            <textarea className="form-control" id="description" name="description" value={description} onChange={this.handleChange} required />
           </div>
           <div className="form-group">
             <label htmlFor="picture_url">Picture URL</label>
-            <input type="text" className="form-control" id="picture_url" name="picture_url" value={pictureUrl} onChange={this.handleChange} />
+            <input type="text" className="form-control" id="picture_url" name="picture_url" value={pictureUrl} onChange={this.handleChange} required />
           </div>
           <div className="form-group">
             <label htmlFor="github_url">GitHub repo URL</label>
-            <input type="text" className="form-control" id="github_url" name="github_url" value={githubUrl} onChange={this.handleChange} />
+            <input type="url" className="form-control" id="github_url" name="github_url" value={githubUrl} onChange={this.handleChange} required />
           </div>
           <button type="submit" className="btn btn-primary">Submit</button>
         </form>
