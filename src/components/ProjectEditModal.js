@@ -6,7 +6,7 @@ import projectPropTypes from '../prop-types/project';
 import './Modal.css';
 
 function ProjectEditModal({
-  project, handleClose,
+  project, handleClose, updateProject,
 }) {
   if (!project) {
     return null;
@@ -31,7 +31,11 @@ function ProjectEditModal({
         </button>
       </div>
       <div className="row mt-5">
-        <EditProjectForm project={project} />
+        <EditProjectForm
+          project={project}
+          handleClose={handleClose}
+          updateProject={updateProject}
+        />
       </div>
     </Modal>
   );
@@ -40,6 +44,7 @@ function ProjectEditModal({
 ProjectEditModal.propTypes = {
   project: projectPropTypes.isRequired,
   handleClose: PropTypes.func.isRequired,
+  updateProject: PropTypes.func.isRequired,
 };
 
 export default ProjectEditModal;

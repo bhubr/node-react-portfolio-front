@@ -19,6 +19,7 @@ class ProjectListContainer extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handlePrev = this.handlePrev.bind(this);
     this.handleNext = this.handleNext.bind(this);
+    this.updateProject = this.updateProject.bind(this);
   }
 
   componentDidMount() {
@@ -74,6 +75,19 @@ class ProjectListContainer extends Component {
     history.push(`/details/${project.id}`);
   }
 
+  updateProject(updatedProject) {
+    this.setState(({ projects }) => {
+      const nextProjects = projects.map(
+        (project) => (
+          project.id === updatedProject.id
+            ? updatedProject
+            : project
+        ),
+      );
+      return { projects: nextProjects };
+    });
+  }
+
   renderModal() {
     const projectIndex = this.findProject();
     if (projectIndex === -1) {
@@ -96,6 +110,7 @@ class ProjectListContainer extends Component {
           <ProjectEditModal
             project={projects[projectIndex]}
             handleClose={this.handleCloseModal}
+            updateProject={this.updateProject}
           />
         );
       default:

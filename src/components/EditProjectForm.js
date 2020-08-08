@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Toast from 'light-toast';
-
+import PropTypes from 'prop-types';
+import projectPropTypes from '../prop-types/project';
 
 class EditProjectForm extends Component {
   constructor(props) {
@@ -21,8 +22,11 @@ class EditProjectForm extends Component {
     event.preventDefault();
     const { id } = this.state;
     axios.put(`/api/projects/${id}`, this.state)
-      .then(() => {
+      .then((res) => {
         Toast.success('Project updated!', 1000);
+        const { handleClose, updateProject } = this.props;
+        updateProject(res.data);
+        handleClose();
       })
       .catch(() => {
         Toast.fail('Failed to update project!', 1000);
@@ -58,5 +62,11 @@ class EditProjectForm extends Component {
     );
   }
 }
+
+EditProjectForm.propTypes = {
+  project: projectPropTypes.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  updateProject: PropTypes.func.isRequired,
+};
 
 export default EditProjectForm;
