@@ -12,9 +12,8 @@ export default function App() {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/details/:projectId" component={Home} />
-          <Route path="/add-project">
-            <AddProjectForm />
-          </Route>
+          <Route exact path="/edit-project/:projectId" component={Home} />
+          <Route path="/add-project" component={AddProjectForm} />
         </Switch>
       </main>
     </div>

@@ -22,7 +22,12 @@ function ProjectCard({ project }) {
             >
               View
             </Link>
-            <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
+            <Link
+              to={`/edit-project/${id}`}
+              className="btn btn-sm btn-outline-secondary"
+            >
+              Edit
+            </Link>
           </div>
 
           <a

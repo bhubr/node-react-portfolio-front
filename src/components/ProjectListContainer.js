@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ProjectList from './ProjectList';
 import Loader from './Loader';
 import ProjectDetailsModal from './ProjectDetailsModal';
+import ProjectEditModal from './ProjectEditModal';
 import apiService from '../services/api';
 import matchPropTypes from '../prop-types/match';
 
@@ -35,7 +36,7 @@ class ProjectListContainer extends Component {
     const { match: { params } } = this.props;
     const { projectId: projectIdStr } = params;
     if (!projectIdStr) {
-      return undefined;
+      return -1;
     }
     const projectId = Number(projectIdStr);
     const { projects } = this.state;
@@ -73,6 +74,35 @@ class ProjectListContainer extends Component {
     history.push(`/details/${project.id}`);
   }
 
+  renderModal() {
+    const projectIndex = this.findProject();
+    if (projectIndex === -1) {
+      return null;
+    }
+    const { match: { path } } = this.props;
+    const { projects } = this.state;
+    switch (path) {
+      case '/details/:projectId':
+        return (
+          <ProjectDetailsModal
+            project={projects[projectIndex]}
+            handleClose={this.handleCloseModal}
+            handlePrev={this.handlePrev}
+            handleNext={this.handleNext}
+          />
+        );
+      case '/edit-project/:projectId':
+        return (
+          <ProjectEditModal
+            project={projects[projectIndex]}
+            handleClose={this.handleCloseModal}
+          />
+        );
+      default:
+        return <h2>Error!</h2>;
+    }
+  }
+
   render() {
     const { projects, error, ready } = this.state;
     if (!ready) {
@@ -87,18 +117,10 @@ class ProjectListContainer extends Component {
         </div>
       );
     }
-    const projectIndex = this.findProject();
     return (
       <>
         {
-          projectIndex !== -1 && (
-            <ProjectDetailsModal
-              project={projects[projectIndex]}
-              handleClose={this.handleCloseModal}
-              handlePrev={this.handlePrev}
-              handleNext={this.handleNext}
-            />
-          )
+          this.renderModal()
         }
         <ProjectList projects={projects} />
       </>
