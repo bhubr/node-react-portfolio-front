@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import projectPropTypes from '../prop-types/project';
 import './Modal.css';
 
-function ProjectDetailsModal({ project, handleClose, handlePrev, handleNext }) {
+function ProjectDetailsModal({
+  project, handleClose, handlePrev, handleNext,
+}) {
   if (!project) {
     return null;
   }
@@ -54,7 +56,9 @@ function ProjectDetailsModal({ project, handleClose, handlePrev, handleNext }) {
             rel="noopener noreferrer"
             className="btn btn-dark"
           >
-            <span className="icon-github" /> Visit repo
+            <span className="icon-github" />
+            {' '}
+            Visit repo
           </a>
         </div>
       </div>
@@ -63,8 +67,14 @@ function ProjectDetailsModal({ project, handleClose, handlePrev, handleNext }) {
 }
 
 ProjectDetailsModal.propTypes = {
-  project: projectPropTypes.isRequired,
+  project: projectPropTypes,
   handleClose: PropTypes.func.isRequired,
+  handlePrev: PropTypes.func.isRequired,
+  handleNext: PropTypes.func.isRequired,
+};
+
+ProjectDetailsModal.defaultProps = {
+  project: null,
 };
 
 export default ProjectDetailsModal;
