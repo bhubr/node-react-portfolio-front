@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Toast from 'light-toast';
 import PropTypes from 'prop-types';
+import ProjectForm from './ProjectForm';
 import projectPropTypes from '../prop-types/project';
 
 class EditProjectForm extends Component {
@@ -34,31 +35,12 @@ class EditProjectForm extends Component {
   }
 
   render() {
-    const {
-      name, description, picture_url: pictureUrl, github_url: githubUrl,
-    } = this.state;
     return (
-      <div className="container">
-        <form onSubmit={this.handleSubmit}>
-          <div className="form-group">
-            <label htmlFor="name">Project name</label>
-            <input type="text" className="form-control" id="name" name="name" value={name} onChange={this.handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="description">Description</label>
-            <textarea className="form-control" id="description" name="description" value={description} onChange={this.handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="picture_url">Picture URL</label>
-            <input type="text" className="form-control" id="picture_url" name="picture_url" value={pictureUrl} onChange={this.handleChange} required />
-          </div>
-          <div className="form-group">
-            <label htmlFor="github_url">GitHub repo URL</label>
-            <input type="url" className="form-control" id="github_url" name="github_url" value={githubUrl} onChange={this.handleChange} required />
-          </div>
-          <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
-      </div>
+      <ProjectForm
+        values={this.state}
+        handleChange={this.handleChange}
+        handleSubmit={this.handleSubmit}
+      />
     );
   }
 }
