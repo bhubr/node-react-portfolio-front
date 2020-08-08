@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ProjectList from './ProjectList';
 import Loader from './Loader';
 import apiService from '../services/api';
+import matchPropTypes from '../prop-types/match';
 
 class ProjectListContainer extends Component {
   constructor(props) {
@@ -25,6 +26,8 @@ class ProjectListContainer extends Component {
   }
 
   render() {
+    const { match: { params } } = this.props;
+    const { projectId } = params;
     const { projects, error, ready } = this.state;
     if (!ready) {
       return <Loader />;
@@ -39,9 +42,16 @@ class ProjectListContainer extends Component {
       );
     }
     return (
-      <ProjectList projects={projects} />
+      <>
+        <h2>{projectId}</h2>
+        <ProjectList projects={projects} />
+      </>
     );
   }
 }
+
+ProjectListContainer.propTypes = {
+  match: matchPropTypes.isRequired,
+};
 
 export default ProjectListContainer;
