@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import ProjectList from './ProjectList';
 import Loader from './Loader';
 import ProjectDetailsModal from './ProjectDetailsModal';
@@ -13,6 +14,7 @@ class ProjectListContainer extends Component {
       error: null,
       ready: false,
     };
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +39,11 @@ class ProjectListContainer extends Component {
     return projects.find(project => project.id === projectId);
   }
 
+  handleCloseModal() {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   render() {
     const { projects, error, ready } = this.state;
     if (!ready) {
@@ -56,6 +63,7 @@ class ProjectListContainer extends Component {
       <>
         <ProjectDetailsModal
           project={project}
+          handleClose={this.handleCloseModal}
         />
         <ProjectList projects={projects} />
       </>
@@ -67,4 +75,4 @@ ProjectListContainer.propTypes = {
   match: matchPropTypes.isRequired,
 };
 
-export default ProjectListContainer;
+export default withRouter(ProjectListContainer);

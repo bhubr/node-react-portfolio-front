@@ -1,16 +1,28 @@
 import React from 'react';
 import Modal from 'react-modal';
+import PropTypes from 'prop-types';
 import projectPropTypes from '../prop-types/project';
+import './Modal.css';
 
-function ProjectDetailsModal({ project }) {
+function ProjectDetailsModal({ project, handleClose }) {
   if (!project) {
     return null;
   }
   return (
     <Modal
       isOpen
+      onRequestClose={handleClose}
     >
-      <h2>{project.name}</h2>
+      <div className="d-flex justify-content-between align-items-start">
+        <h2>{project.name}</h2>
+        <button
+          type="button"
+          className="Modal-button"
+          onClick={handleClose}
+        >
+          <span>&times;</span>
+        </button>
+      </div>
       <div className="row mt-5">
         <div className="col-md-6">
           <img
@@ -38,6 +50,7 @@ function ProjectDetailsModal({ project }) {
 
 ProjectDetailsModal.propTypes = {
   project: projectPropTypes.isRequired,
+  handleClose: PropTypes.func.isRequired,
 };
 
 export default ProjectDetailsModal;

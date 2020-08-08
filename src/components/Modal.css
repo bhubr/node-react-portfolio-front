@@ -1,0 +1,10 @@
+.Modal-button {
+  padding: 0;
+  background: transparent;
+  border: none;
+  font-size: 200%;
+}
+
+.Modal-button:focus {
+  outline: none;
+}
