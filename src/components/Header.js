@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
   return (
@@ -7,7 +8,7 @@ function Header() {
       <div className="navbar navbar-dark bg-dark shadow-sm">
         <div className="container d-flex justify-content-between">
           {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-          <a href="#" className="navbar-brand d-flex align-items-center">
+          <Link to="/" className="navbar-brand d-flex align-items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="20"
@@ -26,7 +27,17 @@ function Header() {
               <circle cx="12" cy="13" r="4" />
             </svg>
             <strong>Portfolio</strong>
-          </a>
+          </Link>
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item active">
+              <Link
+                className="nav-link"
+                to="/add-project"
+              >
+                Add Project
+              </Link>
+            </li>
+          </ul>
         </div>
       </div>
     </header>
