@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ProjectList from './ProjectList';
 import Loader from './Loader';
+import ProjectDetailsModal from './ProjectDetailsModal';
 import apiService from '../services/api';
 import matchPropTypes from '../prop-types/match';
 
@@ -25,9 +26,18 @@ class ProjectListContainer extends Component {
       .finally(() => this.setState({ ready: true }));
   }
 
-  render() {
+  findProject() {
     const { match: { params } } = this.props;
-    const { projectId } = params;
+    const { projectId: projectIdStr } = params;
+    if (!projectIdStr) {
+      return undefined;
+    }
+    const projectId = Number(projectIdStr);
+    const { projects } = this.state;
+    return projects.find(project => project.id === projectId);
+  }
+
+  render() {
     const { projects, error, ready } = this.state;
     if (!ready) {
       return <Loader />;
@@ -41,9 +51,12 @@ class ProjectListContainer extends Component {
         </div>
       );
     }
+    const project = this.findProject();
     return (
       <>
-        <h2>{projectId}</h2>
+        <ProjectDetailsModal
+          project={project}
+        />
         <ProjectList projects={projects} />
       </>
     );
