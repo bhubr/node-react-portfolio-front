@@ -6,7 +6,6 @@ function ProjectCard({ project }) {
   const {
     id,
     name,
-    description,
     github_url: githubUrl,
     picture_url: pictureUrl,
   } = project;
