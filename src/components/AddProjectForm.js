@@ -30,9 +30,8 @@ class AddProjectForm extends Component {
         Toast.success('Project created!', 1000);
         this.setState(initialState);
       })
-      .catch((error) => {
+      .catch(() => {
         Toast.fail('Failed to create project!', 1000);
-        console.error(error);
       });
   }
 
