@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import projectPropTypes from '../prop-types/project';
 import './Modal.css';
 
-function ProjectDetailsModal({ project, handleClose }) {
+function ProjectDetailsModal({ project, handleClose, handlePrev, handleNext }) {
   if (!project) {
     return null;
   }
@@ -13,6 +13,20 @@ function ProjectDetailsModal({ project, handleClose }) {
       isOpen
       onRequestClose={handleClose}
     >
+      <button
+        type="button"
+        className="Modal-button Modal-ctrl Modal-prev"
+        onClick={handlePrev}
+      >
+        &lsaquo;
+      </button>
+      <button
+        type="button"
+        className="Modal-button Modal-ctrl Modal-next"
+        onClick={handleNext}
+      >
+        &rsaquo;
+      </button>
       <div className="d-flex justify-content-between align-items-start">
         <h2>{project.name}</h2>
         <button

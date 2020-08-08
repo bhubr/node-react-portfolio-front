@@ -8,3 +8,24 @@
 .Modal-button:focus {
   outline: none;
 }
+
+.Modal-ctrl {
+  position: fixed;
+  top: calc(50% - 2em);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid rgb(204, 204, 204);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.Modal-prev {
+  left: 20px;
+}
+
+.Modal-next {
+  right: 20px;
+}

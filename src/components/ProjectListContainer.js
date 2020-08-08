@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import ProjectList from './ProjectList';
 import Loader from './Loader';
 import ProjectDetailsModal from './ProjectDetailsModal';
@@ -15,6 +16,8 @@ class ProjectListContainer extends Component {
       ready: false,
     };
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handlePrev = this.handlePrev.bind(this);
+    this.handleNext = this.handleNext.bind(this);
   }
 
   componentDidMount() {
@@ -36,12 +39,38 @@ class ProjectListContainer extends Component {
     }
     const projectId = Number(projectIdStr);
     const { projects } = this.state;
-    return projects.find(project => project.id === projectId);
+    return projects.findIndex((project) => project.id === projectId);
   }
 
   handleCloseModal() {
     const { history } = this.props;
     history.push('/');
+  }
+
+  handlePrev() {
+    const { history } = this.props;
+    const { projects } = this.state;
+    let projectIndex = this.findProject();
+    if (projectIndex === 0) {
+      projectIndex = projects.length - 1;
+    } else {
+      projectIndex -= 1;
+    }
+    const project = projects[projectIndex];
+    history.push(`/details/${project.id}`);
+  }
+
+  handleNext() {
+    const { history } = this.props;
+    const { projects } = this.state;
+    let projectIndex = this.findProject();
+    if (projectIndex === projects.length - 1) {
+      projectIndex = 0;
+    } else {
+      projectIndex += 1;
+    }
+    const project = projects[projectIndex];
+    history.push(`/details/${project.id}`);
   }
 
   render() {
@@ -58,13 +87,19 @@ class ProjectListContainer extends Component {
         </div>
       );
     }
-    const project = this.findProject();
+    const projectIndex = this.findProject();
     return (
       <>
-        <ProjectDetailsModal
-          project={project}
-          handleClose={this.handleCloseModal}
-        />
+        {
+          projectIndex !== -1 && (
+            <ProjectDetailsModal
+              project={projects[projectIndex]}
+              handleClose={this.handleCloseModal}
+              handlePrev={this.handlePrev}
+              handleNext={this.handleNext}
+            />
+          )
+        }
         <ProjectList projects={projects} />
       </>
     );
@@ -73,6 +108,9 @@ class ProjectListContainer extends Component {
 
 ProjectListContainer.propTypes = {
   match: matchPropTypes.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
 };
 
 export default withRouter(ProjectListContainer);
